@@ -1,17 +1,11 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { ToDo } from '../model/todo';
-import { loadToDos, storeToDos } from '../persistence';
+import { storeToDos } from '../persistence';
 import { todoListState } from '../store/ToDoStore';
 import { ToDoList } from './ToDoList';
 
 export default function DoneScreen(): JSX.Element {
   const [todos, setTodos] = useRecoilState(todoListState);
-
-  useEffect(() => {
-    const todos = loadToDos();
-    setTodos(todos);
-  }, [setTodos]);
 
   function removeToDo(todo: ToDo) {
     const newToDos = todos.filter(t => t.id !== todo.id);

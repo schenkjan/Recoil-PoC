@@ -1,18 +1,12 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { ToDo } from '../model/todo';
-import { loadToDos, storeToDos } from '../persistence';
+import { storeToDos } from '../persistence';
 import { todoListState } from '../store/ToDoStore';
 import { NewToDoForm } from './NewToDoForm';
 import { ToDoList } from './ToDoList';
 
 export default function ToDoScreen(): JSX.Element {
     const [todos, setTodos] = useRecoilState(todoListState);
-
-    useEffect(() => {
-      const todos = loadToDos();
-      setTodos(todos);
-    }, [setTodos]);
   
     function completeToDo(todo: ToDo) {
       const newToDos = todos.filter(t => t.id !== todo.id);
