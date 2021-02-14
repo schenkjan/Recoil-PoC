@@ -1,4 +1,4 @@
-import { atom, AtomEffect, DefaultValue } from "recoil";
+import { atom, AtomEffect, DefaultValue, selector } from "recoil";
 import { ToDo } from "../model/todo";
 import { loadToDos, storeToDos } from "../persistence";
 
@@ -26,4 +26,22 @@ export const todoListState = atom<ToDo[]>({
     effects_UNSTABLE: [
         localStorageEffect, // Usage of the side effect to persist changes in state in local storage, see https://recoiljs.org/docs/guides/atom-effects/#local-storage-persistence for details.
     ]
+});
+
+// Implementation of derived state using a Recoil Selector, see https://recoiljs.org/docs/basic-tutorial/selectors or https://recoiljs.org/docs/introduction/core-concepts#selectors for details.
+export const openTodos = selector<number>({
+    key: "openTodos",
+    get: ({get}) => {
+        const todos = get(todoListState); // Retrieve the Atom to derive the state from.
+        return todos.filter(todo => !todo.completed).length; // Return the derived state.
+    }
+});
+
+// Implementation of derived state using a Recoil Selector, see https://recoiljs.org/docs/basic-tutorial/selectors or https://recoiljs.org/docs/introduction/core-concepts#selectors for details.
+export const doneTodos = selector<number>({
+    key: "doneTodos",
+    get: ({get}) => {
+        const todos = get(todoListState); // Retrieve the Atom to derive the state from.
+        return todos.filter(todo => todo.completed).length; // Return the derived state.
+    }
 });

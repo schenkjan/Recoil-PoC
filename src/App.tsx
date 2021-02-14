@@ -1,9 +1,11 @@
 import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import DoneScreen from './components/DoneScreen';
+import { ToDoNavigation } from './components/ToDoNavigation';
 import ToDoScreen from './components/ToDoScreen';
 
 export function App() {
+  
   return (
     // Wrapping the whole app with RecoilRoot to get access to recoil's functionality, see https://recoiljs.org/docs/introduction/getting-started/#recoilroot for details.
     <RecoilRoot>
@@ -15,10 +17,7 @@ export function App() {
       </div>
 
       <BrowserRouter>
-        <ul>
-          <li><NavLink exact to="/" activeClassName="active">ToDo</NavLink></li>
-          <li><NavLink exact to="/done" activeClassName="active">Done</NavLink></li>
-        </ul>
+        <ToDoNavigation />
 
         <Switch>
           <Route path="/done" component={DoneScreen}/>
