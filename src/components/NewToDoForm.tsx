@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { storeToDos } from '../persistence';
+import { todoListState } from '../store/ToDoStore';
 
-type NewToDoFormProps = {
-  onAddToDo: (title: string) => void
-};
-
-export function NewToDoForm({onAddToDo}: NewToDoFormProps) {
-
+export function NewToDoForm() {
   const [toDoTitle, setToDoTitle] = useState('');
+  const setTodoList = useSetRecoilState(todoListState);
 
   function formChange(e: ChangeEvent<HTMLInputElement>) {
     setToDoTitle(e.target.value);
@@ -14,7 +13,11 @@ export function NewToDoForm({onAddToDo}: NewToDoFormProps) {
 
   function addToDo(e: FormEvent) {
     e.preventDefault();
-    onAddToDo(toDoTitle);
+    setTodoList((oldTodoList) => {
+      const newToDos = [...oldTodoList, {id: Math.random().toString(), title: toDoTitle, completed: false}];
+      storeToDos(newToDos);
+      return newToDos;
+    });
     setToDoTitle('');
   }
 

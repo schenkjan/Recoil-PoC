@@ -14,13 +14,6 @@ export default function ToDoScreen(): JSX.Element {
       setTodos(todos);
     }, [setTodos]);
   
-  
-    function addToDo(title: string) {
-      const newToDos = [...todos, {id: Math.random().toString(), title: title, completed: false}];
-      setTodos(newToDos);
-      storeToDos(newToDos);
-    }
-  
     function completeToDo(todo: ToDo) {
       const newToDos = todos.filter(t => t.id !== todo.id);
       newToDos.push({...todo, completed: true});
@@ -31,7 +24,7 @@ export default function ToDoScreen(): JSX.Element {
     return (
         <section className="todoapp">
 
-          <NewToDoForm onAddToDo={addToDo}/>
+          <NewToDoForm />
 
           <div className="main">
             <ToDoList todos={todos.filter(todo => !todo.completed)} onRemoveToDo={completeToDo}/>
