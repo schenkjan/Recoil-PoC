@@ -71,6 +71,12 @@ input::-ms-clear{
   color: rgba(175, 47, 47, 0.55);
 }
 
+.active {
+  font-weight: bold;
+  cursor: default;
+  text-decoration: none;
+}
+
 .new-todo {
   display: flex;
   padding: 1px 20px 1px 20px;
