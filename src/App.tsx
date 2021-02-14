@@ -5,6 +5,7 @@ import ToDoScreen from './components/ToDoScreen';
 
 export function App() {
   return (
+    // Wrapping the whole app with RecoilRoot to get access to recoil's functionality, see https://recoiljs.org/docs/introduction/getting-started/#recoilroot for details.
     <RecoilRoot>
       <div className="App">
 

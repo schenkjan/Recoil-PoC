@@ -4,7 +4,7 @@ import { todoListState } from '../store/ToDoStore';
 
 export function NewToDoForm() {
   const [toDoTitle, setToDoTitle] = useState('');
-  const setTodoList = useSetRecoilState(todoListState);
+  const setTodoList = useSetRecoilState(todoListState); // Instead of React's useState we use the useSetRecoilState hook to update the state to Recoil, see https://recoiljs.org/docs/api-reference/core/useSetRecoilState for details.
 
   function formChange(e: ChangeEvent<HTMLInputElement>) {
     setToDoTitle(e.target.value);
