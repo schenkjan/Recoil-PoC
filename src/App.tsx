@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import DoneScreen from './components/DoneScreen';
 import { ToDoNavigation } from './components/ToDoNavigation';
