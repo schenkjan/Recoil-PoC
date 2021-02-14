@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
+import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* Wrapping the whole app with RecoilRoot to get access to recoil's functionality, see https://recoiljs.org/docs/introduction/getting-started/#recoilroot for details. */}
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
