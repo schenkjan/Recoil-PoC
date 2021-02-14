@@ -19,10 +19,10 @@ const localStorageEffect: AtomEffect<ToDo[]> = ({ setSelf, onSet }) => {
     });
 };
 
-// Implementation of the store for ToDos as a Recoil Atom, see https://recoiljs.org/docs/introduction/getting-started/#atom for details.
+// Implementation of the store for ToDos as a Recoil Atom, see https://recoiljs.org/docs/introduction/getting-started/#atom or https://recoiljs.org/docs/basic-tutorial/atoms for details.
 export const todoListState = atom<ToDo[]>({
     key: "todoListState",
-    default: loadToDos(),
+    default: loadToDos(), // Load the initial/default values from local storage.
     effects_UNSTABLE: [
         localStorageEffect, // Usage of the side effect to persist changes in state in local storage, see https://recoiljs.org/docs/guides/atom-effects/#local-storage-persistence for details.
     ]
