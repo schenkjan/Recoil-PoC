@@ -1,29 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { ToDo } from '../model/todo';
 import { loadToDos, storeToDos } from '../persistence';
+import { todoListState } from '../store/ToDoStore';
 import { ToDoList } from './ToDoList';
 
 export default function DoneScreen(): JSX.Element {
-    const [todos, setTodos] = useState<ToDo[]>([]);
+  const [todos, setTodos] = useRecoilState(todoListState);
 
-    useEffect(() => {
-      const todos = loadToDos();
-      setTodos(todos);
-    }, []);
-  
-    function removeToDo(todo: ToDo) {
-      const newToDos = todos.filter(t => t.id !== todo.id);
-      setTodos(newToDos);
-      storeToDos(newToDos);
-    }
+  useEffect(() => {
+    const todos = loadToDos();
+    setTodos(todos);
+  }, [setTodos]);
 
-    return (
-        <section className="todoapp">
+  function removeToDo(todo: ToDo) {
+    const newToDos = todos.filter(t => t.id !== todo.id);
+    setTodos(newToDos);
+    storeToDos(newToDos);
+  }
 
-          <div className="main">
-            <ToDoList todos={todos.filter(todo => todo.completed)} onRemoveToDo={removeToDo}/>
-          </div>
+  return (
+      <section className="todoapp">
 
-        </section>
-    );
+        <div className="main">
+          <ToDoList todos={todos.filter(todo => todo.completed)} onRemoveToDo={removeToDo}/>
+        </div>
+
+      </section>
+  );
 }
