@@ -1,15 +1,19 @@
-import { atom, AtomEffect } from "recoil";
+import { atom, AtomEffect, DefaultValue } from "recoil";
 import { ToDo } from "../model/todo";
 import { loadToDos, storeToDos } from "../persistence";
 
-const localStorageEffect: AtomEffect<any> = ({ setSelf, onSet }) => {
+const localStorageEffect: AtomEffect<ToDo[]> = ({ setSelf, onSet }) => {
     const savedTodos = loadToDos();
     if (savedTodos != null) {
         setSelf(savedTodos);
     }
 
     onSet(newTodos => {
-        storeToDos(newTodos);
+        if (newTodos instanceof DefaultValue) {
+            storeToDos([]);
+        } else {
+            storeToDos(newTodos);
+        }
     });
 };
 

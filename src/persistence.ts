@@ -7,5 +7,9 @@ export function loadToDos(): ToDo[]{
 }
 
 export function storeToDos(todos: ToDo[]){
-    localStorage.setItem('TODOS', JSON.stringify(todos));
+    if (todos.length > 0) {
+        localStorage.setItem('TODOS', JSON.stringify(todos));    
+    } else {
+        localStorage.removeItem('TODOS');
+    }
 }
