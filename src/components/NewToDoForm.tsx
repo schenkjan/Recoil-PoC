@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { storeToDos } from '../persistence';
 import { todoListState } from '../store/ToDoStore';
 
 export function NewToDoForm() {
@@ -15,7 +14,6 @@ export function NewToDoForm() {
     e.preventDefault();
     setTodoList((oldTodoList) => {
       const newToDos = [...oldTodoList, {id: Math.random().toString(), title: toDoTitle, completed: false}];
-      storeToDos(newToDos);
       return newToDos;
     });
     setToDoTitle('');

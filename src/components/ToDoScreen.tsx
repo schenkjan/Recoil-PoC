@@ -1,6 +1,5 @@
 import { useRecoilState } from 'recoil';
 import { ToDo } from '../model/todo';
-import { storeToDos } from '../persistence';
 import { todoListState } from '../store/ToDoStore';
 import { NewToDoForm } from './NewToDoForm';
 import { ToDoList } from './ToDoList';
@@ -12,7 +11,6 @@ export default function ToDoScreen(): JSX.Element {
       const newToDos = todos.filter(t => t.id !== todo.id);
       newToDos.push({...todo, completed: true});
       setTodos(newToDos);
-      storeToDos(newToDos);
     }
 
     return (
